@@ -1,0 +1,10 @@
+# Personal git files - kokhono push korbi na
+.git-credentials
+.gitconfig
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Termux files
+.terminalrc
