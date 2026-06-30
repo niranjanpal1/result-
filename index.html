@@ -1,22 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>Google Search Clone</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #fff; }
+       .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; }
+       .header-left { display: flex; align-items: center; gap: 20px; }
+       .header-left span { font-size: 14px; color: #5f6368; border-bottom: 2px solid #1a73e8; padding-bottom: 12px; cursor: pointer; }
+       .header-left.inactive { border: none; color: #70757a; }
+       .header-right { display: flex; align-items: center; gap: 15px; }
+       .apps-icon { width: 24px; height: 24px; opacity: 0.6; cursor: pointer; }
+       .profile { width: 32px; height: 32px; border-radius: 50%; background: #7b1fa2; cursor: pointer; }
+       .logo { text-align: center; margin-top: 20px; margin-bottom: 30px; }
+       .logo img { width: 200px; cursor: pointer; }
+       .search-box { margin: 0 20px; position: relative; }
+       .search-input { width: 100%; height: 44px; border: 1px solid #dfe1e5; border-radius: 24px; padding: 0 50px 0 45px; font-size: 16px; outline: none; }
+       .search-input:focus { box-shadow: 0 1px 6px rgba(32,33,36,.28); }
+       .search-icon { position: absolute; left: 15px; top: 12px; width: 20px; opacity: 0.4; }
+       .mic-cam { position: absolute; right: 15px; top: 10px; display: flex; gap: 12px; }
+       .mic-cam img { width: 24px; cursor: pointer; }
+       .lang { text-align: center; margin: 25px 20px; font-size: 13px; color: #4d5156; }
+       .lang a { color: #1a0dab; text-decoration: none; margin: 0 8px; line-height: 28px; }
+       .trending { padding: 0 20px; margin-top: 20px; }
+       .trending h3 { font-size: 18px; font-weight: 400; color: #202124; margin-bottom: 15px; }
+       .trend-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #ebebeb; font-size: 14px; color: #202124; cursor: pointer; }
+       .trend-item:hover { background: #f8f9fa; }
+       .trend-icon { margin-right: 15px; opacity: 0.6; }
+       .trend-item img { width: 20px; margin-left: auto; }
+    </style>
 </head>
 <body>
-    <div class="search-container">
-        <!-- Google Logo (আপনি যেকোনো ইমেজ লিংক দিতে পারেন) -->
-        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
-        
-        <!-- সার্চ ফর্ম -->
-        <form action="https://www.google.com/search" method="GET">
-            <input type="text" name="q" placeholder="Google-এ সার্চ করুন...">
-            <div class="buttons">
-                <button type="submit">Google Search</button>
-            </div>
-        </form>
+    <div class="header">
+        <div class="header-left">
+            <span onclick="alert('সমস্ত কিছু clicked')">সমস্ত কিছু</span>
+            <span class="inactive" onclick="window.open('https://www.google.com/imghp','_blank')">IMAGES</span>
+        </div>
+        <div class="header-right">
+            <svg class="apps-icon" onclick="alert('Google Apps')" focusable="false" viewBox="0 0 24 24"><path d="M6,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM16,6c0,1.1 0.9,2 2,2s2,-0.9 2,-2 -0.9,-2 -2,0.9 -2,2zM12,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,0.9 -2,2 0.9,2 2,2zM18,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,0.9 -2,2 0.9,2 2,2z"></path></svg>
+            <div class="profile" onclick="alert('Profile clicked')"></div>
+        </div>
     </div>
+
+    <div class="logo">
+        <img src="https://www.google.com/logos/doodles/2024/cricket-world-cup-2024-6753651837110529-2xa.gif" alt="Google" onclick="location.reload()">
+    </div>
+
+    <form id="searchForm">
+        <div class="search-box">
+            <svg class="search-icon" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+            <div class="mic-cam">
+                <img src="https://www.gstatic.com/images/branding/googlemic/2x/googlemic_color_24dp.png" alt="mic" onclick="startVoice()">
+                <img src="https://www.gstatic.com/images/icons/material/system/2x/photo_camera_grey600_24dp.png" alt="camera" onclick="alert('Camera feature')">
+            </div>
+        </div>
+    </form>
+
+    <div class="lang">
+        Google এই ভাষায় উপলব্ধ:<br>
+        <a href="#" onclick="alert('English selected')">English</a>
+        <a href="#" onclick="alert('Hindi selected')">हिन्दी</a>
+        <a href="#">తెలుగు</a>
+        <a href="#">मराठी</a>
+        <a href="#">தமிழ்</a>
+        <a href="#">ગુજરાતી</a>
+        <a href="#">ಕನ್ನಡ</a>
+        <a href="#">മലയാളം</a>
+        <a href="#">ਪੰਜਾਬੀ</a>
+    </div>
+
+    <div class="trending">
+        <h3>ট্রেন্ডিং সার্চ</h3>
+        <div class="trend-item" onclick="searchTrend('আজকের রাশিফল')">
+            <span class="trend-icon">↗</span> আজকের রাশিফল
+        </div>
+        <div class="trend-item" onclick="searchTrend('ওয়েস্ট ইন্ডিজ ক্রিকেট দল')">
+            <span class="trend-icon">↗</span> ওয়েস্ট ইন্ডিজ ক্রিকেট দল
+            <img src="https://ssl.gstatic.com/onebox/sports/logos/cricket/wi.png" alt="">
+        </div>
+        <div class="trend-item" onclick="searchTrend('brazil vs japan football')">
+            <span class="trend-icon">↗</span> brazil vs japan football
+        </div>
+        <div class="trend-item" onclick="searchTrend('ভিডিও')">
+            <span class="trend-icon">↗</span> ভিডিও
+        </div>
+    </div>
+
+    <script>
+        // Enter marle Google a search hobe
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let query = document.getElementById('searchInput').value;
+            if(query) {
+                window.open('https://www.google.com/search?q=' + encodeURIComponent(query), '_blank');
+            }
+        });
+
+        // Trending a click korle search hobe
+        function searchTrend(text) {
+            window.open('https://www.google.com/search?q=' + encodeURIComponent(text), '_blank');
+        }
+
+        // Voice search er jonno
+        function startVoice() {
+            if ('webkitSpeechRecognition' in window) {
+                let recognition = new webkitSpeechRecognition();
+                recognition.lang = 'bn-IN';
+                recognition.onresult = function(event) {
+                    document.getElementById('searchInput').value = event.results[0][0].transcript;
+                };
+                recognition.start();
+            } else {
+                alert('Voice search not supported in this browser');
+            }
+        }
+    </script>
 </body>
 </html>
