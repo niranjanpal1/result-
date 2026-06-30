@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.search-container {
+    text-align: center;
+}
+img {
+    margin-bottom: 20px;
+}
+input[type="text"] {
+    width: 400px;
+    padding: 12px;
+    border-radius: 25px;
+    border: 1px solid #dfe1e5;
+    outline: none;
+    margin-bottom: 20px;
+}
+button {
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    border: 1px solid #dadce0;
+}
